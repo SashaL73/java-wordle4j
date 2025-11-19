@@ -169,6 +169,10 @@ public class WordleGame {
                 newGeneratedWord = generatedWord;
                 stringMask(answer, generatedWord);
                 updatedDictionary = updateDictionary(updatedDictionary, correctPositions, denyLetters);
+                if (updatedDictionary.contains(generatedWord)) {
+                    updatedDictionary.remove(generatedWord);
+                    return mask;
+                }
                 return mask;
             }
         } else {
@@ -182,6 +186,10 @@ public class WordleGame {
             } else {
                 stringMask(answer, word);
                 updatedDictionary = updateDictionary(updatedDictionary, correctPositions, denyLetters);
+                if (updatedDictionary.contains(word)) {
+                    updatedDictionary.remove(word);
+                    return mask;
+                }
                 return mask;
             }
 
