@@ -25,10 +25,9 @@ public class WordleDictionary {
 
     public List<String> newListFiveLetters(List<String> list) {
         List<String> fiveLetter = new ArrayList<>();
-        try {
             for (String string : list) {
                 if (string.length() == 5) {
-                    fiveLetter.add(string);
+                    fiveLetter.add(string.toLowerCase());
                 }
             }
             for (int i = 0; i < fiveLetter.size(); i++) {
@@ -37,10 +36,6 @@ public class WordleDictionary {
                 }
             }
             return fiveLetter;
-        } catch (IndexOutOfBoundsException e) {
-            log.println(e.getMessage());
-        }
-        return fiveLetter;
     }
 
     public String generatedWord(List<String> list) {
