@@ -35,6 +35,7 @@ public class Wordle {
                             System.out.println(newWord);
                             System.out.println(wordleGame.getMask());
                             if (newWord.equals(wordleGame.getAnswer())) {
+                                System.out.println("Вы угадали, загаданное слово " + wordleGame.getAnswer());
                                 return;
                             }
                             wordleGame.setSteps(wordleGame.getSteps() + 1);
@@ -46,15 +47,18 @@ public class Wordle {
                             wordleGame.game(word);
                             System.out.println(wordleGame.getMask());
                             if (word.equals(wordleGame.getAnswer())) {
+                                System.out.println("Вы угадали, загаданное слово " + wordleGame.getAnswer());
                                 return;
                             }
                             wordleGame.setSteps(wordleGame.getSteps() + 1);
                         }
 
                     } catch (InvalidWordException | WordNotFoundInDictionary e) {
+                        System.out.println(e.getMessage());
                         log.println(e.getMessage());
                     }
                 }
+                System.out.println("Загаданное слово " + wordleGame.getAnswer());
 
             }
         } catch (IOException e) {
