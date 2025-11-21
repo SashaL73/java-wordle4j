@@ -19,8 +19,9 @@ import java.util.Scanner;
  */
 public class Wordle {
 
-    public static void main(String[] args) {
-        try (PrintWriter log = new PrintWriter(new FileWriter("log.txt"))) {
+    public static void main(String[] args) throws IOException {
+        PrintWriter log = new PrintWriter(new FileWriter("log.txt"));
+        try (log) {
             WordleDictionaryLoader wordleDictionaryLoader = new WordleDictionaryLoader(log);
             WordleDictionary wordleDictionary = wordleDictionaryLoader.wordleDictionaryLoader();
             WordleGame wordleGame = new WordleGame(wordleDictionary, log);
@@ -38,7 +39,7 @@ public class Wordle {
                                 System.out.println("Вы угадали, загаданное слово " + wordleGame.getAnswer());
                                 return;
                             }
-                            wordleGame.setSteps(wordleGame.getSteps() + 1);
+                            wordleGame.addSteps();
                         } else if (word.length() != 5 || !word.matches("[а-я]+")) {
                             throw new InvalidWordException("Слово должно состоять из 5 русских букв");
                         } else if (!wordleDictionary.getWords().contains(word)) {
@@ -50,7 +51,7 @@ public class Wordle {
                                 System.out.println("Вы угадали, загаданное слово " + wordleGame.getAnswer());
                                 return;
                             }
-                            wordleGame.setSteps(wordleGame.getSteps() + 1);
+                            wordleGame.addSteps();
                         }
 
                     } catch (InvalidWordException | WordNotFoundInDictionary e) {
@@ -59,10 +60,9 @@ public class Wordle {
                     }
                 }
                 System.out.println("Загаданное слово " + wordleGame.getAnswer());
-
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace(log);
         }
     }
 
