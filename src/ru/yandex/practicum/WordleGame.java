@@ -73,6 +73,10 @@ public class WordleGame {
         return steps;
     }
 
+    public void addSteps() {
+        steps++;
+    }
+
     public void stringMask(String answer, String word) {
         StringBuilder sb = new StringBuilder();
         char[] answerMassive = answer.toCharArray();
